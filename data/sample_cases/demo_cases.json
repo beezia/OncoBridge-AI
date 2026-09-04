@@ -1,0 +1,65 @@
+{
+  "cases": [
+    {
+      "id": "P001",
+      "label": "Case 1 — Lung Adenocarcinoma (EGFR exon 19 del)",
+      "cancer_type": "Non-Small Cell Lung Cancer (Lung Adenocarcinoma)",
+      "imaging_modality": "CT",
+      "clinical_notes": "68-year-old Asian female non-smoker. Incidental right upper lobe nodule found on screening CT. Progressive cough and mild dyspnea x 3 months. No constitutional symptoms. ECOG PS 1. No prior thoracic surgery. Chest CT shows 2.4 cm part-solid nodule with ground-glass opacity component, right upper lobe, without satellite nodules. Mediastinal staging PET/CT shows no FDG-avid mediastinal or hilar nodes. Clinical stage IA3 (T2aN0M0).",
+      "genomic_summary": {
+        "key_variants": ["EGFR exon 19 deletion (p.Glu746_Ala750del, AF 0.42)", "TP53 p.R175H (AF 0.38)", "STK11 p.Q37* (AF 0.28)"],
+        "tmb": 4.2,
+        "msi": "MSS",
+        "pd_l1": "TPS 5%",
+        "molecular_subtype": "EGFR-mutant LUAD (Exon 19 deletion)",
+        "tier1_actionable": ["EGFR exon 19 del → Osimertinib (FDA-approved)"]
+      },
+      "expected_findings": {
+        "treatment": "Osimertinib 80mg daily (FLAURA data: mPFS 18.9 months)",
+        "concordance": "Concordant — part-solid GGO nodule consistent with EGFR-mutant LUAD",
+        "trials": ["NCT04685070 (LAURA)", "NCT05563688 (REFRACT)"]
+      }
+    },
+    {
+      "id": "P002",
+      "label": "Case 2 — Glioblastoma (IDH-wildtype, MGMT methylated)",
+      "cancer_type": "Glioblastoma Multiforme",
+      "imaging_modality": "MR",
+      "clinical_notes": "55-year-old male presenting with 6-week history of progressive right-sided weakness and expressive aphasia. MRI brain with contrast shows 4.8 cm ring-enhancing mass in the left temporal-parietal lobe with extensive surrounding FLAIR signal abnormality (edema). Central necrosis on T1 post-contrast. Mass effect with 8mm midline shift. Gross total resection achieved. KPS 70. No prior chemotherapy or radiotherapy.",
+      "genomic_summary": {
+        "key_variants": ["IDH1 wildtype", "TERT promoter C228T mutation (AF 0.61)", "EGFR amplification (copy number 18)", "MGMT promoter methylated (73%)", "PTEN loss"],
+        "tmb": 2.1,
+        "msi": "MSS",
+        "molecular_subtype": "IDH-wildtype GBM (WHO Grade 4), MGMT-methylated",
+        "tier1_actionable": ["MGMT methylated → Temozolomide + RT (enhanced benefit)"]
+      },
+      "expected_findings": {
+        "treatment": "Stupp protocol: TMZ 75mg/m2 + RT 60Gy/30fx, then adjuvant TMZ x6 cycles + TTFields (Optune)",
+        "concordance": "Concordant — ring-enhancing mass with necrosis consistent with IDH-wildtype GBM",
+        "trials": ["NCT03978988", "IDH-wildtype GBM immunotherapy trials"]
+      }
+    },
+    {
+      "id": "P003",
+      "label": "Case 3 — Breast Cancer — ⚠️ DISCORDANCE ALERT",
+      "cancer_type": "Breast Cancer (HER2-positive)",
+      "imaging_modality": "MR",
+      "clinical_notes": "47-year-old female. Palpable left breast mass discovered on self-exam. Mammogram: 3.1 cm irregular mass with spiculated margins, left upper outer quadrant. MRI: heterogeneous enhancement with rapid washout kinetics. No axillary adenopathy on imaging. Core needle biopsy from dominant lesion. IHC: ER+, PR+, HER2-negative (IHC 1+, FISH non-amplified). Genomic sequencing from same biopsy. NOTE: Imaging phenotype (aggressive enhancement, rapid washout, spiculation) does not match expected IHC/genomic profile. Prior radiology report questioned biopsy adequacy.",
+      "genomic_summary": {
+        "key_variants": ["PIK3CA p.H1047R (AF 0.44)", "ERBB2 amplification (copy number 9.2)", "TP53 missense (AF 0.31)", "CDH1 frameshift"],
+        "tmb": 6.8,
+        "msi": "MSS",
+        "molecular_subtype": "PIK3CA-mutant — ⚠️ ERBB2 amplification detected (discordant with IHC HER2-)",
+        "tier1_actionable": [
+          "PIK3CA H1047R → Alpelisib + Fulvestrant (SOLAR-1)",
+          "ERBB2 amplification → HER2-targeted therapy (if confirmed by repeat testing)"
+        ]
+      },
+      "expected_findings": {
+        "treatment": "⚠️ HOLD — Repeat HER2 testing required. If HER2+ confirmed: Trastuzumab + Pertuzumab + Taxane. If PIK3CA dominant: Alpelisib + endocrine therapy.",
+        "concordance": "⚠️ DISCORDANT — MRI shows aggressive HER2-like phenotype but IHC HER2-negative. NGS shows ERBB2 amplification. Biopsy sampling error or intratumoral heterogeneity suspected.",
+        "trials": ["NCT04417036 (DESTINY-Breast09 — pending HER2 confirmation)"]
+      }
+    }
+  ]
+}

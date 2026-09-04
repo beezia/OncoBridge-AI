@@ -1,0 +1,80 @@
+# OncoBridge AI — Runtime Configuration
+# Optimized for Intel Xeon 6 + locally downloaded Gemma 4 26B-A4B (Kaggle)
+
+model:
+  # ── Path to your Kaggle download ─────────────────────────────────────────
+  # Edit this to match where you saved the model folder.
+  # The folder must contain: config.json, tokenizer.json, model-*.safetensors
+  # Runtime override: ONCOBRIDGE_MODEL_DIR=/path/to/folder python main.py
+  local_model_dir: "models/gemma-4-26b-a4b-it"   # ← EDIT THIS PATH
+
+  # Model identity (display only — not used for local loading)
+  name: "google/gemma-4-26B-A4B-it"
+
+  # Precision — leave as "auto" to select by available RAM:
+  #   bf16 = 52 GB RAM  (best quality, Xeon 6 AMX-BF16 accelerated)
+  #   int8 = 27 GB RAM  (good quality, comfortable on 32 GB)
+  #   int4 = 15 GB RAM  (minimum viable)
+  # Override: ONCOBRIDGE_PRECISION=int8 python main.py
+  precision: "auto"
+
+  # Generation
+  max_new_tokens: 2048
+  temperature: 0.1          # Low for clinical accuracy; raise to 0.7 for creativity
+  context_length: 32768     # 26B-A4B supports up to 256K tokens
+  enable_thinking: false    # Set true to enable Gemma 4 chain-of-thought <think> mode
+
+  # OpenVINO (optional — only used if openvino.convert_on_load: true)
+  openvino_ir_dir: "./models/gemma4_ov"
+  quantization: "INT4"
+
+openvino:
+  device: "CPU"                     # CPU = Xeon 6 with AMX-BF16
+  cpu_threads: 0                    # 0 = auto-detect all cores
+  enable_amx: true                  # Advanced Matrix Extensions (Xeon 6 key feature)
+  enable_avx512: true
+  cache_dir: "./models/ov_cache"
+  kv_cache_precision: "f16"
+  performance_hint: "THROUGHPUT"
+  convert_on_load: false            # Set true to auto-convert HF → OV on first run
+
+imaging:
+  supported_formats: ["dcm", "nii", "nii.gz", "png", "jpg", "jpeg"]
+  resize_for_vit: [336, 336]
+  radiomics_config: "./configs/radiomics_params.yaml"
+  segmentation_model: "./models/totalsegmentator_ov"
+  slice_selection: "max_tumor"
+
+genomics:
+  vep_cache_dir: "./data/vep_cache"
+  clinvar_db: "./data/clinvar_20250101.vcf.gz"
+  tcga_signatures: "./data/tcga_molecular_subtypes.json"
+  radiogenomics_map: "./data/radiogenomics_correlations.json"
+
+rag:
+  chroma_dir: "./data/chroma_db"
+  embedding_model: "BAAI/bge-m3"
+  embedding_device: "CPU"
+  top_k: 1
+  chunk_size: 512
+  chunk_overlap: 64
+
+clinical_trials:
+  api_url: "https://clinicaltrials.gov/api/v2/studies"
+  max_results: 10
+  status_filter: "RECRUITING"
+  cache_ttl_hours: 24
+
+demo:
+  sample_cases_dir: "./data/sample_cases"
+  output_dir: "./outputs"
+  enable_streaming: true
+  show_reasoning: true
+  auto_load_case: "P001"
+
+ui:
+  title: "OncoBridge AI — Precision Oncology Decision Support"
+  theme: "soft"
+  server_port: 7860
+  share: false
+  show_performance_metrics: true
