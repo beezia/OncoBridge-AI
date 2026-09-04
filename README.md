@@ -1,7 +1,7 @@
 # OncoBridge AI — Multimodal Precision Oncology Decision Support
-### RSNA 2027 Demo | Kaggle Gemma 4 Good Hackathon Submission
+### RSNA 2027 Demo |Potential Reference Application for HLS AI Suite
 
-**Powered by:** Gemma 4 (26B MoE) · OpenVINO 2026.x · Intel Xeon 6 · RAG · Radiogenomics
+**Powered by:** Gemma 4 (26B MoE) · OpenVINO 2026.3 · Intel Xeon 6 · RAG · Radiogenomics
 
 ---
 
