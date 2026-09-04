@@ -82,14 +82,6 @@ python main.py
 
 ---
 
-## Kaggle Submission Notes
-
-- **Track:** Health & Sciences
-- **Model:** Gemma 4 26B MoE (INT4 quantized via OpenVINO NNCF)
-- **Multimodal:** Vision tower processes CT/MR scan slices directly
-- **Function calling:** Agents use Gemma 4 native function calling for tool dispatch
-- **Real-world impact:** Reduces tumor board prep from 4 hours to <15 minutes
-
 ---
 
 ## Demo Cases
